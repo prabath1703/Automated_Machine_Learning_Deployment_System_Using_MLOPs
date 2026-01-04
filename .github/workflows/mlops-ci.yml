@@ -1,0 +1,57 @@
+name: MLOps CI/CD Pipeline
+
+on:
+  push:
+    paths:
+      - 'src/**'
+      - 'data/**'
+      - 'Dockerfile'
+      - 'requirements.txt'
+
+jobs:
+  mlops:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repo
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install mlflow[extras] fastapi uvicorn scikit-learn pandas
+
+      # Step 4: Run model training & selection
+      - name: Train and select best model
+        run: |
+          python src/train_and_select.py
+
+      # Step 5: Build Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t student-pass-api .
+
+      # Step 6: Stop old container if exists
+      - name: Stop old container
+        run: |
+          docker ps -q --filter "name=student-pass-api" | xargs -r docker stop
+          docker ps -a -q --filter "name=student-pass-api" | xargs -r docker rm
+
+      # Step 7: Run new Docker container
+      - name: Run Docker container
+        run: |
+          docker run -d -p 8000:8000 --name student-pass-api student-pass-api
+
+      # Step 8: Confirm deployment
+      - name: Check deployment
+        run: |
+          echo "API should now be running at http://localhost:8000"

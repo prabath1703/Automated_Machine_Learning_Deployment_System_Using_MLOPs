@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/damar/OneDrive/Desktop/Sample_MLOPs/mlruns/184209627391740697/1323cc91205348969af9f14652dae2e0/artifacts
+end_time: 1767557192080
+entry_point_name: ''
+experiment_id: '184209627391740697'
+lifecycle_stage: active
+run_id: 1323cc91205348969af9f14652dae2e0
+run_name: Logistic_Regression
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1767557186710
+status: 3
+tags: []
+user_id: damar

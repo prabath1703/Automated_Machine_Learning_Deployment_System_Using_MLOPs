@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/damar/OneDrive/Desktop/Sample_MLOPs/mlruns/184209627391740697/216f7ff3baf14176996c09af06337008/artifacts
+end_time: 1767557454856
+entry_point_name: ''
+experiment_id: '184209627391740697'
+lifecycle_stage: active
+run_id: 216f7ff3baf14176996c09af06337008
+run_name: Register_Best_Model
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1767557451824
+status: 3
+tags: []
+user_id: damar

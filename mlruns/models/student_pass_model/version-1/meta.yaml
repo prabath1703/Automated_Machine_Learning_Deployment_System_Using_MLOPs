@@ -1,0 +1,15 @@
+creation_timestamp: 1767557198243
+current_stage: None
+deployment_job_state: null
+description: null
+last_updated_timestamp: 1767557198243
+model_id: m-cbece9ac864b4df784ee0925d18eabbe
+name: student_pass_model
+run_id: 4b848659e1f14b8ba9318f541153dfc1
+run_link: null
+source: models:/m-cbece9ac864b4df784ee0925d18eabbe
+status: READY
+status_message: null
+storage_location: file:///C:/Users/damar/OneDrive/Desktop/Sample_MLOPs/mlruns/184209627391740697/models/m-cbece9ac864b4df784ee0925d18eabbe/artifacts
+user_id: null
+version: 1

@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/damar/OneDrive/Desktop/Sample_MLOPs/mlruns/184209627391740697/models/m-2245fe3d81e24363bb874fbe99026cce/artifacts
+creation_timestamp: 1767557797368
+experiment_id: '184209627391740697'
+last_updated_timestamp: 1767557800257
+model_id: m-2245fe3d81e24363bb874fbe99026cce
+model_type: null
+name: model
+source_run_id: b8bbdc9b8eb64a0e852b856793b6c488
+status: 2
+status_message: null

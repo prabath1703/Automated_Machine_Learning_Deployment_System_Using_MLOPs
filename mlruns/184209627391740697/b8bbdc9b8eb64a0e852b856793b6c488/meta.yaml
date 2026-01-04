@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/damar/OneDrive/Desktop/Sample_MLOPs/mlruns/184209627391740697/b8bbdc9b8eb64a0e852b856793b6c488/artifacts
+end_time: 1767557800279
+entry_point_name: ''
+experiment_id: '184209627391740697'
+lifecycle_stage: active
+run_id: b8bbdc9b8eb64a0e852b856793b6c488
+run_name: Random_Forest
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1767557797197
+status: 3
+tags: []
+user_id: damar
