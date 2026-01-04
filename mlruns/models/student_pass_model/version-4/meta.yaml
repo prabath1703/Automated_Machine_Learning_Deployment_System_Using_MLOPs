@@ -1,8 +1,8 @@
 creation_timestamp: 1767557803428
-current_stage: Production
+current_stage: Archived
 deployment_job_state: null
 description: null
-last_updated_timestamp: 1767558811306
+last_updated_timestamp: 1767561853438
 model_id: m-c52c5019d5574eeeada41f559d1a3ac7
 name: student_pass_model
 run_id: 81d011ae90ec4fa6a01d06f9c99bcad7

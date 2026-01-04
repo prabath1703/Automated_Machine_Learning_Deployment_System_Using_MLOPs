@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# MLflow
+mlruns/
+artifacts/
+
+# Uploaded data (if temporary)
+uploaded_data/
+
+# VSCode / IDE
+.vscode/
