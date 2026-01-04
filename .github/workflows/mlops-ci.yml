@@ -10,50 +10,36 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # ------------------ Step 1: Checkout code ------------------
     - name: Checkout Code
       uses: actions/checkout@v3
 
-    # ------------------ Step 2: Set up Python ------------------
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
 
-    # ------------------ Step 3: Install dependencies ------------------
     - name: Install Dependencies
       run: |
         pip install --upgrade pip
         pip install -r requirements.txt
 
-    # ------------------ Step 4: Prepare dataset ------------------
-    - name: Prepare dataset
-      run: |
-        mkdir -p data
-        curl -o data/student.csv https://raw.githubusercontent.com/prabath1703/Automated_Machine_Learning_Deployment_System_Using_MLOPs/main/data/student.csv
-
-    # ------------------ Step 5: Train ML Model ------------------
     - name: Train ML Model
       run: |
         python src/train_and_select.py
 
-    # ------------------ Step 6: Build Docker Image ------------------
     - name: Build Docker Image
       run: |
         docker build -t student-pass-api .
 
-    # ------------------ Step 7: Stop old container if exists ------------------
-    - name: Stop old container
+    - name: Stop old container if exists
       run: |
         docker ps -q --filter "name=student-pass-api" | xargs -r docker stop
         docker ps -a -q --filter "name=student-pass-api" | xargs -r docker rm
 
-    # ------------------ Step 8: Run new Docker container ------------------
     - name: Run Docker container
       run: |
         docker run -d -p 8000:8000 --name student-pass-api student-pass-api
 
-    # ------------------ Step 9: Confirm deployment ------------------
-    - name: Check deployment
+    - name: Confirm deployment
       run: |
         echo "API should now be running at http://localhost:8000"

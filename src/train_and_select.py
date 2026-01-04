@@ -11,22 +11,23 @@ import mlflow
 import mlflow.sklearn
 from mlflow.tracking import MlflowClient
 
-# ------------------ Paths & Config ------------------
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))  # src folder
-DATASET_PATH = os.path.join(BASE_DIR, "../data/student.csv")
+# ------------------ Config ------------------
+BASE_DIR = os.getcwd()
+DATASET_PATH = os.path.join(BASE_DIR, "data", "student.csv")
 REGISTERED_MODEL_NAME = "student_pass_model"
 EXPORT_ARTIFACTS = True  # save local copy of best model
-MLRUNS_PATH = os.path.join(BASE_DIR, "../mlruns")  # ensure repo-root relative
+MLFLOW_TRACKING_URI = os.path.join(BASE_DIR, "mlruns")
+ARTIFACTS_DIR = os.path.join(BASE_DIR, "artifacts")
+os.makedirs(ARTIFACTS_DIR, exist_ok=True)
 
 # ------------------ Load Dataset ------------------
 data = pd.read_csv(DATASET_PATH)
 
-# Required columns
+# Check expected columns
 expected_cols = ["study_hours", "attendance", "internal_marks", "pass"]
 missing_cols = [c for c in expected_cols if c not in data.columns]
 if missing_cols:
     raise ValueError(f"Dataset missing columns: {missing_cols}")
-
 data = data[expected_cols]
 
 # Encode target
@@ -40,10 +41,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # ------------------ MLflow Setup ------------------
-MLFLOW_TRACKING_URI = os.path.join(os.getcwd(), "mlruns")
-ARTIFACTS_DIR = os.path.join(os.getcwd(), "artifacts")
-os.makedirs(ARTIFACTS_DIR, exist_ok=True)
-mlflow.set_tracking_uri(f"file://{MLRUNS_PATH}")
+mlflow.set_tracking_uri(f"file://{MLFLOW_TRACKING_URI}")
 mlflow.set_experiment("Best_Student_Model")
 
 results = {}
@@ -93,7 +91,7 @@ with mlflow.start_run(run_name="Register_Best_Model"):
         registered_model_name=REGISTERED_MODEL_NAME
     )
 
-# ------------------ Get new version ------------------
+# ------------------ Get new version properly ------------------
 client = MlflowClient()
 latest_versions = client.get_latest_versions(REGISTERED_MODEL_NAME)
 new_version = latest_versions[-1].version
@@ -133,7 +131,6 @@ else:
 # ------------------ Optional: Save local copy ------------------
 if EXPORT_ARTIFACTS:
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    EXPORT_DIR = os.path.join(BASE_DIR, f"../artifacts/best_model_{timestamp}")
-    os.makedirs(EXPORT_DIR, exist_ok=True)
+    EXPORT_DIR = os.path.join(ARTIFACTS_DIR, f"best_model_{timestamp}")
     mlflow.sklearn.save_model(best_model, path=EXPORT_DIR)
     print(f"Local export saved at: {EXPORT_DIR}")
