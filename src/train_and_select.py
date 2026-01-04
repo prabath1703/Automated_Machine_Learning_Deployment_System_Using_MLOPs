@@ -40,7 +40,10 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # ------------------ MLflow Setup ------------------
-mlflow.set_tracking_uri(f"file:{MLRUNS_PATH}")
+MLFLOW_TRACKING_URI = os.path.join(os.getcwd(), "mlruns")
+ARTIFACTS_DIR = os.path.join(os.getcwd(), "artifacts")
+os.makedirs(ARTIFACTS_DIR, exist_ok=True)
+mlflow.set_tracking_uri(f"file://{MLRUNS_PATH}")
 mlflow.set_experiment("Best_Student_Model")
 
 results = {}
